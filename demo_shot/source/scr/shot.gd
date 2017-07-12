@@ -15,7 +15,7 @@ func _process(delta):
 
 	self.set_translation(vctPos)
 
-	if vctPos.z < -100:
+	if vctPos.z < -64:
 		self.queue_free()
 
 	if self.disabled == false:

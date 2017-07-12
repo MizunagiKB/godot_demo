@@ -7,7 +7,7 @@
 
 extents = Vector3( 1, 1, 1 )
 
-[node name="model" type="RigidBody"]
+[node name="enemy" type="RigidBody"]
 
 _import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 input/ray_pickable = false
@@ -44,7 +44,7 @@ shape = SubResource( 1 )
 trigger = true
 _update_shape_index = 0
 
-[node name="KinematicBody" type="MeshInstance" parent="."]
+[node name="mesh" type="MeshInstance" parent="."]
 
 _import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 transform/local = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0 )

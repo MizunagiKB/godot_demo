@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=1]
 
 [ext_resource path="res://res/image/particle.png" type="Texture" id=1]
-[ext_resource path="res://res/scene/particle.gd" type="Script" id=2]
+[ext_resource path="res://scr/particle_life.gd" type="Script" id=2]
 
 [sub_resource type="FixedMaterial" id=1]
 
@@ -20,9 +20,9 @@ fixed_flags/use_color_array = false
 fixed_flags/use_point_size = false
 fixed_flags/discard_alpha = false
 fixed_flags/use_xy_normalmap = false
-params/diffuse = Color( 1, 1, 1, 1 )
+params/diffuse = Color( 0.53125, 0.249023, 0.249023, 1 )
 params/specular = Color( 0, 0, 0, 1 )
-params/emission = Color( 1, 1, 1, 1 )
+params/emission = Color( 1, 0.428772, 0.253906, 1 )
 params/specular_exp = 40
 params/detail_mix = 1.0
 params/normal_depth = 1
@@ -42,7 +42,7 @@ textures/glow_tc = 0
 textures/normal_tc = 0
 textures/shade_param_tc = 0
 
-[node name="Particles" type="Particles"]
+[node name="particle_1" type="Particles"]
 
 _import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 layers = 1
@@ -68,11 +68,11 @@ emission_base_velocity = Vector3( 0, 0, 0 )
 emission_points = Vector3Array(  )
 gravity_normal = Vector3( 0, 0, 0 )
 local_coords = false
-emit_timeout = 0.5
-vars/lifetime = 1.0
+emit_timeout = 0.3
+vars/lifetime = 0.5
 vars/spread = 1.0
-vars/gravity = 0.0
-vars/linear_vel = 10.0
+vars/gravity = 1.0
+vars/linear_vel = 30.0
 vars/angular_vel = 10.0
 vars/linear_accel = 5.0
 vars/radial_accel = 0.0
@@ -102,7 +102,7 @@ color_phases/count = 1
 phase_0/pos = 0.0
 phase_0/color = Color( 1, 1, 1, 1 )
 phase_1/pos = 1.0
-phase_1/color = Color( 1, 1, 1, 1 )
+phase_1/color = Color( 1, 0, 0, 1 )
 phase_2/pos = 1.0
 phase_2/color = Color( 0, 0, 0, 1 )
 phase_3/pos = 1.0

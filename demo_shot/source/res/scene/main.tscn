@@ -1,8 +1,8 @@
-[gd_scene load_steps=5 format=1]
+[gd_scene load_steps=6 format=1]
 
-[ext_resource path="res://res/scene/main.gd" type="Script" id=1]
-[ext_resource path="res://res/model/user.msh" type="Mesh" id=2]
-[ext_resource path="res://scr/user.gd" type="Script" id=3]
+[ext_resource path="res://scr/main.gd" type="Script" id=1]
+[ext_resource path="res://scr/player.gd" type="Script" id=2]
+[ext_resource path="res://res/model/user.msh" type="Mesh" id=3]
 
 [sub_resource type="Environment" id=1]
 
@@ -10,8 +10,8 @@ ambient_light/enabled = true
 ambient_light/color = Color( 0.09375, 0.09375, 0.09375, 1 )
 ambient_light/energy = 1.0
 fxaa/enabled = false
-background/mode = 1
-background/color = Color( 0, 0, 0, 1 )
+background/mode = 2
+background/color = Color( 0.0672607, 0.0799446, 0.148438, 1 )
 background/energy = 1.0
 background/scale = 1.0
 background/glow = 0.0
@@ -24,7 +24,7 @@ glow/blur_blend_mode = 1
 glow/bloom = 1.21
 glow/bloom_treshold = 0.85
 dof_blur/enabled = false
-dof_blur/blur_passes = 2
+dof_blur/blur_passes = 4
 dof_blur/begin = 0.0
 dof_blur/range = 0.0
 hdr/enabled = false
@@ -36,10 +36,10 @@ hdr/glow_scale = 1.77
 hdr/min_luminance = 0.4
 hdr/max_luminance = 8.0
 hdr/exposure_adj_speed = 0.5
-fog/enabled = false
-fog/begin = 1024.0
-fog/begin_color = Color( 0, 0, 0, 1 )
-fog/end_color = Color( 0, 0, 0, 1 )
+fog/enabled = true
+fog/begin = 59.37
+fog/begin_color = Color( 1, 0, 0, 1 )
+fog/end_color = Color( 1, 1, 1, 1 )
 fog/attenuation = 1.0
 fog/bg = false
 bcs/enabled = false
@@ -47,6 +47,10 @@ bcs/brightness = 1.0
 bcs/contrast = 1.0
 bcs/saturation = 1.0
 srgb/enabled = false
+
+[sub_resource type="SphereShape" id=2]
+
+radius = 1.0
 
 [node name="main" type="Node"]
 
@@ -84,7 +88,7 @@ shadow/zoffset_scale = 2.0
 [node name="Camera" type="Camera" parent="."]
 
 _import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
-transform/local = Transform( 1, 0, 0, 0, 0.807203, 0.590274, 0, -0.590274, 0.807203, 0, 19.1809, 15.3596 )
+transform/local = Transform( 1, 0, 0, 0, 0.68053, 0.73272, 0, -0.73272, 0.68053, 0, 25.8656, 14.3699 )
 projection = 0
 fov = 45.0
 near = 0.1
@@ -95,29 +99,6 @@ visible_layers = 1048575
 environment = null
 h_offset = 0.0
 v_offset = 0.0
-
-[node name="user" type="MeshInstance" parent="."]
-
-_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
-transform/local = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0 )
-layers = 1
-geometry/visible = true
-geometry/material_override = null
-geometry/cast_shadow = 0
-geometry/receive_shadows = false
-geometry/range_begin = 0.0
-geometry/range_end = 0.0
-geometry/extra_cull_margin = 0.0
-geometry/billboard = false
-geometry/billboard_y = false
-geometry/depth_scale = false
-geometry/visible_in_all_rooms = false
-geometry/use_baked_light = false
-geometry/baked_light_tex_id = 0
-mesh/mesh = ExtResource( 2 )
-mesh/skeleton = NodePath("..")
-material/0 = null
-script/script = ExtResource( 3 )
 
 [node name="lbl_score" type="Label" parent="."]
 
@@ -135,5 +116,65 @@ valign = 2
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
+
+[node name="player" type="RigidBody" parent="."]
+
+_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+input/ray_pickable = false
+input/capture_on_drag = false
+shape_count = 1
+shapes/0/shape = SubResource( 2 )
+shapes/0/transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+mode = 2
+mass = 1.0
+friction = 1.0
+bounce = 0.0
+gravity_scale = 0.0
+custom_integrator = false
+continuous_cd = false
+contacts_reported = 1
+contact_monitor = false
+sleeping = false
+can_sleep = true
+axis_lock = 0
+velocity/linear = Vector3( 0, 0, 0 )
+velocity/angular = Vector3( 0, 0, 0 )
+damp_override/linear = -1.0
+damp_override/angular = -1.0
+script/script = ExtResource( 2 )
+RAPID_SPEED = 8
+MOVE_SPEED = 0.5
+
+[node name="CollisionShape" type="CollisionShape" parent="player"]
+
+_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
+shape = SubResource( 2 )
+trigger = false
+_update_shape_index = 0
+
+[node name="model" type="MeshInstance" parent="player"]
+
+_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+layers = 1
+geometry/visible = true
+geometry/material_override = null
+geometry/cast_shadow = 1
+geometry/receive_shadows = false
+geometry/range_begin = 0.0
+geometry/range_end = 0.0
+geometry/extra_cull_margin = 0.0
+geometry/billboard = false
+geometry/billboard_y = false
+geometry/depth_scale = false
+geometry/visible_in_all_rooms = false
+geometry/use_baked_light = false
+geometry/baked_light_tex_id = 0
+mesh/mesh = ExtResource( 3 )
+mesh/skeleton = NodePath("..")
+material/0 = null
 
 
