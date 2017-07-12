@@ -29,6 +29,7 @@ func _integrate_forces(state):
 					self.queue_free()
 					system.score += 100
 
+
 func _process(delta):
 	var vctPos = self.get_translation()
 
