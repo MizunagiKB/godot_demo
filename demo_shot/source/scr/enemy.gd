@@ -2,7 +2,6 @@ extends RigidBody
 
 
 onready var ins_particle = preload("res://res/scene/particle.tscn")
-onready var scene_main = get_node("/lbl_score")
 
 var power = 1
 var vctDir = Vector3(0, 0, 1)
@@ -30,7 +29,6 @@ func _integrate_forces(state):
 					self.queue_free()
 					system.score += 100
 
-
 func _process(delta):
 	var vctPos = self.get_translation()
 
@@ -43,6 +41,7 @@ func _process(delta):
 
 
 func _ready():
+
 	set_process(true)
 
 
